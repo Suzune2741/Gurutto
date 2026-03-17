@@ -9,13 +9,14 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const keyword = searchParams.get("keyword") ?? "";
   const lat = searchParams.get("lat") ?? "35.6895";
   const lng = searchParams.get("lng") ?? "139.6917";
-
+  const radius = searchParams.get("radius") ?? "3";
   if (!keyword) return { shops: [] };
 
   const url = new URL("https://webservice.recruit.co.jp/hotpepper/gourmet/v1/");
   url.searchParams.set("key", context.cloudflare.env.API_KEY);
   url.searchParams.set("lat", lat);
   url.searchParams.set("lng", lng);
+  url.searchParams.set("range", radius);
   url.searchParams.set("keyword", keyword);
   url.searchParams.set("format", "json");
   url.searchParams.set("count", "20");

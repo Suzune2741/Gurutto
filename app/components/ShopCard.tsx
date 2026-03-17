@@ -5,7 +5,6 @@ type Props = {
 };
 
 export const ShopCard = ({ shop }: any) => {
-  console.log(shop.id);
   return (
     <Link to={`/research/${shop.id}`}>
       <div className="rounded overflow-hidden shadow-lg flex flex-row w-80 h-40 my-2 bg-[#fff9f2] hover:bg-[#f5ede0]">

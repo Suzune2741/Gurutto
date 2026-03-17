@@ -1,8 +1,9 @@
-import { Children, type ButtonHTMLAttributes } from "react";
+import { type ButtonHTMLAttributes, type ReactNode } from "react";
 
 type ButtonSize = "sm" | "md" | "lg";
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSize;
+  icon?: ReactNode;
 };
 const sizeClass: Record<ButtonSize, string> = {
   sm: "text-xs px-3 py-1.5 rounded-lg",
@@ -11,6 +12,7 @@ const sizeClass: Record<ButtonSize, string> = {
 };
 export const Button = ({
   size = "md",
+  icon,
   className = "",
   children,
   ...props
@@ -19,11 +21,13 @@ export const Button = ({
     <button
       type="submit"
       className={[
-        "h-11 bg-red-500 hover:bg-red-700 text-white font-medium transition-colors",
+        "h-11 bg-red-500 hover:bg-red-700 text-white font-medium transition-colors flex items-center gap-2",
         sizeClass[size],
       ].join(" ")}
+      {...props}
     >
       {children}
+      {icon && <>{icon}</>}
     </button>
   );
 };
