@@ -1,8 +1,10 @@
-import { Form, useNavigate, useNavigation } from "react-router";
+import { useNavigation } from "react-router";
 import type { Route } from "./+types/Research";
 import { SearchField } from "~/components/SearchField";
 import { ShopCard } from "~/components/ShopCard";
 import { useGeolocation } from "~/hooks/useGeolocation";
+import { IoSearchSharp } from "react-icons/io5";
+import { Button } from "~/components/Button";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
@@ -31,16 +33,7 @@ export default function Research({ loaderData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const isSearching = navigation.state === "loading";
   const { coords } = useGeolocation();
-  const navigate = useNavigate();
-  const handleSearch = (keyword: string) => {
-    const params = new URLSearchParams();
-    params.set("keyword", keyword);
-    if (coords) {
-      params.set("lat", String(coords.latitude));
-      params.set("lng", String(coords.longitude));
-    }
-    navigate(`/shops?${params.toString()}`);
-  };
+
   return (
     <div className="flex flex-col items-center my-5 gap-1">
       <p className="text-xl">検索する</p>

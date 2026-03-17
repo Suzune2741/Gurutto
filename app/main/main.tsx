@@ -3,7 +3,6 @@ import { SearchField } from "../components/SearchField";
 import { useGeolocation } from "~/hooks/useGeolocation";
 import { reverseGeocode } from "~/utils/reverseGeocoder";
 import { useEffect, useState } from "react";
-import { Slider } from "~/components/Slider";
 export function Main() {
   const { coords, error, loading } = useGeolocation();
   const [address, setAddress] = useState<string | null>(null);
