@@ -11,9 +11,11 @@ export const DetailPage = ({ shop }: Props) => {
   //TODO:　地図を出す
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
+  console.log(shop);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
       <div className="flex flex-row gap-10">
         <div className="flex flex-col items-center">
@@ -37,15 +39,42 @@ export const DetailPage = ({ shop }: Props) => {
           </p>
           <p className="text-xl text-wrap flex flex-row items-center">
             <MdOutlineCurrencyYen />
-            平均金額:{shop.budget.average}
+            平均金額:
+            {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
         </div>
       </div>
-      <p className=" flex items-end">
-        <Link to="/research" className="text-blue-700">
-          検索ページへ戻る
+      <div className="mb-3">
+        <p className="flex justify-center text-xl font-bold mb-1.5">店舗写真</p>
+        <picture>
+          <source media="(max-width: 768px)" srcSet={shop.photo.mobile.l} />
+          <img
+            src={shop.photo.pc.l}
+            alt={`${shop.name}の店舗写真`}
+            className="w-full max-w-md object-contain rounded-lg"
+          />
+        </picture>
+      </div>
+      <div className="w-full max-w-md my-5">
+        <p className="flex justify-center text-xl font-bold mb-1.5">店舗位置</p>
+        <iframe
+          title="shop-map"
+          src={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}&z=15&output=embed`}
+          width="100%"
+          height="300"
+          className="border-0 rounded-lg shadow-md"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <div className="w-full flex justify-end px-7 mt-5 mb-10">
+        <Link
+          to="/research"
+          className="text-blue-700 hover:underline flex items-center"
+        >
+          ←検索ページへ戻る
         </Link>
-      </p>
+      </div>
     </div>
   );
 };
