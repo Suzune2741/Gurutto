@@ -1,4 +1,6 @@
+import MUNI_ARRAY from "~/utils/muni.ts";
 export type Address = {
+  prefecture: string;
   city: string;
   town: string;
   joinAddress: string;
@@ -7,7 +9,6 @@ type GsiResponse = {
   results: {
     muniCd: string; // 市区町村コード
     lv01Nm: string; // 都道府県 + 市区町村
-    lv02Nm: string; // 町・大字
   };
 };
 export const reverseGeocode = async (
@@ -16,15 +17,16 @@ export const reverseGeocode = async (
 ): Promise<Address> => {
   const url = `https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${lat}&lon=${lng}`;
   const res = await fetch(url);
-
   if (!res.ok) throw new Error("住所の取得に失敗しました");
-  console.log(await res.json());
+
   const data: GsiResponse = await res.json();
-  const { lv01Nm, lv02Nm } = data.results;
-  console.log(lv01Nm, lv02Nm);
+  const { muniCd, lv01Nm } = data.results;
+  const muni = MUNI_ARRAY[muniCd].split(",");
+
   return {
-    city: lv01Nm,
-    town: lv02Nm,
-    joinAddress: `${lv01Nm}${lv02Nm}`,
+    prefecture: muni[1],
+    city: muni[3],
+    town: lv01Nm,
+    joinAddress: `${muni[1]}${muni[3]}${lv01Nm}`,
   };
 };
