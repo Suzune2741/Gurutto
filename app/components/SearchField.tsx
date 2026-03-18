@@ -8,7 +8,7 @@ type Props = {
 };
 export const SearchField = ({ lat, lng }: Props) => {
   return (
-    <Form method="get" className="flex items-center">
+    <Form method="get" className="flex items-center" action="/research">
       <div className="flex flex-col">
         <div className="flex flex-col mb-2">
           <p>検索半径の設定</p>

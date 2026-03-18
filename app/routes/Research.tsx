@@ -3,8 +3,6 @@ import type { Route } from "./+types/Research";
 import { SearchField } from "~/components/SearchField";
 import { ShopCard } from "~/components/ShopCard";
 import { useGeolocation } from "~/hooks/useGeolocation";
-import { IoSearchSharp } from "react-icons/io5";
-import { Button } from "~/components/Button";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
