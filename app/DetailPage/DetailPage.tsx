@@ -8,15 +8,13 @@ type Props = {
   shop: any;
 };
 export const DetailPage = ({ shop }: Props) => {
-  console.log(shop);
   //TODO:　地図を出す
   const date = getDate();
-  console.log(date);
   const nowOpen = getNowOpen(date, shop.open);
-  console.log(nowOpen);
+
   return (
     <div className="flex flex-col items-center">
-      <p className="text-3xl my-5">店舗詳細</p>
+      <p className="text-3xl my-5 font-bold">店舗詳細</p>
       <div className="flex flex-row gap-10">
         <div className="flex flex-col items-center">
           <img

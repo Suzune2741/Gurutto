@@ -18,7 +18,7 @@ export const SearchField = ({ lat, lng }: Props) => {
     <Form method="get" className="flex items-center" action="/research">
       <div className="flex flex-col">
         <div className="flex flex-col mb-2">
-          <p>検索半径の設定</p>
+          <p className="text-xl">検索半径</p>
           <Slider />
         </div>
         <div className="flex flex-row gap-2">
