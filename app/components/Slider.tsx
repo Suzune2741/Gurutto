@@ -5,7 +5,7 @@ import { useState } from "react";
  * 参考: https://daisyui.com/components/range/
  */
 export const Slider = () => {
-  const [index, setIndex] = useState<number>(3);
+  const [index, setIndex] = useState<number>(2);
   const steps = [
     { label: "300m", distance: 1 },
     { label: "500m", distance: 2 },
