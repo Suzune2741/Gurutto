@@ -11,7 +11,6 @@ export function Main() {
     reverseGeocode(coords.latitude, coords.longitude)
       .then((result) => setAddress(result.joinAddress))
       .catch((error) => console.log(error));
-    console.log("address", address);
   }, [coords]);
   return (
     <>
@@ -19,7 +18,7 @@ export function Main() {
         <p className="text-4xl">きゃっちこぴー</p>
         <div>
           <p className="text-2xl">現在地付近のレストランを検索する</p>
-          <div className="flex flex-row items-center border rounded-3xl px-2">
+          <div className="flex flex-row items-center border rounded-3xl mt-1 px-3 w-fit">
             <MdPlace size={20} />
             <p className="text-xl">現在地: {address ?? "取得中"}</p>
           </div>

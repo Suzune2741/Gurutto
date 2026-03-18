@@ -1,4 +1,4 @@
-import { Main } from "~/main/main";
+import { Main } from "~/Main/Main";
 
 export default function Home() {
   return <Main />;
