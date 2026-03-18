@@ -10,6 +10,14 @@ const sizeClass: Record<ButtonSize, string> = {
   md: "text-sm px-4 py-2 rounded-xl",
   lg: "text-base px-6 py-3 rounded-xl",
 };
+/**
+ * 汎用的なボタン
+ * @param props
+ * @param props.size ボタンのサイズ（"sm" | "md" | "lg" ,デフォルトは "md"）
+ * @param props.icon ボタン内に表示するアイコン要素
+ * @param props.className 追加のCSSクラス
+ * @param props.children ボタンのテキストや内包する要素
+ */
 export const Button = ({
   size = "md",
   icon,
@@ -23,6 +31,7 @@ export const Button = ({
       className={[
         "h-11 bg-red-500 hover:bg-red-700 text-white font-medium transition-colors flex items-center gap-2",
         sizeClass[size],
+        className
       ].join(" ")}
       {...props}
     >

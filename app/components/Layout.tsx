@@ -1,5 +1,7 @@
 import { Outlet, Link } from "react-router";
-
+/**
+ * ヘッダーとフッターを記述する
+ */
 export default function Layout() {
   //TODO: pathを変更する
   const menuItems = [

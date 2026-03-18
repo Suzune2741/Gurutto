@@ -2,10 +2,17 @@ import { Form } from "react-router";
 import { Button } from "./Button";
 import { IoSearchSharp } from "react-icons/io5";
 import { Slider } from "./Slider";
+
 type Props = {
   lat?: number;
   lng?: number;
 };
+/**
+ * 検索フィールド
+ * @param props
+ * @param props.lat 緯度
+ * @param props.lng 経度
+ */
 export const SearchField = ({ lat, lng }: Props) => {
   return (
     <Form method="get" className="flex items-center" action="/research">
