@@ -29,7 +29,7 @@ export const Button = ({
     <button
       type="submit"
       className={[
-        "h-11 bg-red-500 hover:bg-red-700 text-white font-medium transition-colors flex items-center gap-2",
+        "h-11 text-white font-medium transition-colors flex items-center gap-2",
         sizeClass[size],
         className
       ].join(" ")}
