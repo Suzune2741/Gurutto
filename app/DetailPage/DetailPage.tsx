@@ -8,12 +8,15 @@ type Props = {
   shop: any;
 };
 export const DetailPage = ({ shop }: Props) => {
-  //TODO:　地図を出す
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
   console.log(shop);
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+  // 営業時間の文章が長いので区切る
+  // 区切りにスペースがある場合とない場合があるので正規表現で対策
+  const formattedOpen = shop.open.replace(
+    /(\d{2}:\d{2}|[）)])\s*([月火水木金土日祝])/g,
+    "$1\n$2",
+  );
   return (
     <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
@@ -27,16 +30,19 @@ export const DetailPage = ({ shop }: Props) => {
           <p className="text-2xl font-bold">{nowOpen ? "営業中" : "準備中"}</p>
         </div>
         <div>
-          <p className="text-2xl font-bold">店名:{shop.name}</p>
+          <p className="text-2xl font-bold">{shop.catch}</p>
+          <p className="text-2xl font-bold">{shop.name}</p>
           <p className="text-xl flex flex-row items-center">
             <MdOutlinePlace />
             住所:{shop.address}
           </p>
-          <p className="text-xl text-wrap flex flex-row items-center line-clamp-2 wrap-break-word">
-            {/*文章が長くなるので対策する*/}
-            <FaRegClock />
-            営業時間:{shop.open}
-          </p>
+          <div className="flex flex-col items-start gap-1  text-xl">
+            <div className="flex flex-row">
+              <FaRegClock className="mt-1 shrink-0" />
+              <p className="text-xl">営業時間</p>
+            </div>
+            <p className="wrap-break-word">{formattedOpen}</p>
+          </div>
           <p className="text-xl text-wrap flex flex-row items-center">
             <MdOutlineCurrencyYen />
             平均金額:
@@ -56,7 +62,10 @@ export const DetailPage = ({ shop }: Props) => {
         </picture>
       </div>
       <div className="w-full max-w-md my-5">
-        <p className="flex justify-center text-xl font-bold mb-1.5">店舗位置</p>
+        <div className="flex flex-col justify-center items-center text-xl mb-2 gap-1">
+          <p className="font-bold">店舗位置</p>
+          <p>{shop.access}</p>
+        </div>
         <iframe
           title="shop-map"
           src={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}&z=15&output=embed`}
