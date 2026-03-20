@@ -8,6 +8,7 @@ import { ShopCard } from "~/components/ShopCard";
 import { useGeolocation } from "~/hooks/useGeolocation";
 import { reverseGeocode } from "~/utils/reverseGeocoder";
 import { FaListUl, FaTh } from "react-icons/fa";
+import { ShopList } from "~/components/ShopList";
 
 type Props = {
   shops: any;
@@ -43,7 +44,7 @@ export const ResearchPage = ({
       .then((result) => setAddress(result.joinAddress))
       .catch((error) => console.log(error));
   }, [coords]);
-  console.log(currentPage, totalItems);
+
   return (
     <div className="flex flex-col items-center my-5 gap-1 w-full">
       <p className="text-xl">検索する</p>
@@ -89,11 +90,20 @@ export const ResearchPage = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-3 mx-5">
-            {shops.map((shop: any) => (
-              <ShopCard key={shop.id} shop={shop} />
-            ))}
-          </div>
+          {viewStatus === "Card" ? (
+            <div className="flex flex-wrap gap-3 mx-5">
+              {shops.map((shop: any) => (
+                <ShopCard key={shop.id} shop={shop} />
+              ))}
+            </div>
+          ) : (
+            shops.map((shop: any) => (
+              <div className="w-1/2">
+                <ShopList key={shop.id} shop={shop} />
+              </div>
+            ))
+          )}
+
           {totalPages > 1 && (
             <Pagination
               currentPage={currentPage}
