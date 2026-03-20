@@ -3,11 +3,8 @@ import { Outlet, Link } from "react-router";
  * ヘッダーとフッターを記述する
  */
 export default function Layout() {
-  //TODO: pathを変更する
   const menuItems = [
     { name: "さがす", path: "/research" },
-    { name: "お気に入り", path: "/" },
-    { name: "設定", path: "/settings" },
   ];
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,7 +28,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="flex justify-center p-2 text-gray-500 dark:text-gray-400">
-        <p className="text-sm">© 2025-2026 Suzune</p>
+        <p className="text-sm">© 2026 Suzune</p>
       </footer>
     </div>
   );
