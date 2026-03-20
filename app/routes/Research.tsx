@@ -7,7 +7,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const lng = searchParams.get("lng") ?? "139.6917";
   const radius = searchParams.get("radius") ?? "3";
   const page = Number(searchParams.get("page") || "1");
-  const count = 10;
+  const count = Number(searchParams.get("count") || "10");
   const start = (page - 1) * count + 1;
 
   if (!keyword)

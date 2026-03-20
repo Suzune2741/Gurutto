@@ -30,7 +30,11 @@ export const SearchField = ({ lat, lng }: Props) => {
           />
           <input type="hidden" name="lat" value={lat ?? "35.6895"} />
           <input type="hidden" name="lng" value={lng ?? "139.6917"} />
-          <Button type="submit" icon={<IoSearchSharp />}>
+          <Button
+            type="submit"
+            icon={<IoSearchSharp />}
+            className="bg-red-500 hover:bg-red-700"
+          >
             検索
           </Button>
         </div>
