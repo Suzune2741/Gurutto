@@ -10,10 +10,6 @@ type Option = {
 export const DropDownList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCount = searchParams.get("count") || "10";
-  const [selectedOption, setSelectedOption] = useState<Option>({
-    value: "10",
-    label: "10件",
-  });
 
   const options: Option[] = [
     { value: "10", label: "10件" },
