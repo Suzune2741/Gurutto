@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { useSearchParams } from "react-router";
 
@@ -6,17 +5,18 @@ type Option = {
   value: string;
   label: string;
 };
-
-export const DropDownList = () => {
+type Props = {
+  options: Option[];
+};
+/**
+ * ドロップダウンリスト
+ * @param props
+ * @param props.options 選択肢の配列
+ */
+export const DropDownList = ({ options }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentCount = searchParams.get("count") || "10";
 
-  const options: Option[] = [
-    { value: "10", label: "10件" },
-    { value: "20", label: "20件" },
-    { value: "50", label: "50件" },
-    { value: "100", label: "100件" },
-  ];
   const handleSelectOption = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     const newParams = new URLSearchParams(searchParams);

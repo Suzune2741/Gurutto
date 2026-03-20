@@ -7,10 +7,14 @@ import { getNowOpen } from "~/utils/getNowOpen";
 type Props = {
   shop: any;
 };
+/**
+ * 検索時の一覧表示用コンポーネント
+ * @param props
+ * @param props.shop APIから取得したデータ
+ */
 export const DetailPage = ({ shop }: Props) => {
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
-  console.log(shop);
   // 営業時間の文章が長いので区切る
   // 区切りにスペースがある場合とない場合があるので正規表現で対策
   const formattedOpen = shop.open.replace(

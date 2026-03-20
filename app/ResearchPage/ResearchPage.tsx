@@ -86,7 +86,14 @@ export const ResearchPage = ({
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-bold text-gray-700">表示件数</p>
-                <DropDownList />
+                <DropDownList
+                  options={[
+                    { value: "10", label: "10件" },
+                    { value: "20", label: "20件" },
+                    { value: "50", label: "50件" },
+                    { value: "100", label: "100件" },
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -97,11 +104,13 @@ export const ResearchPage = ({
               ))}
             </div>
           ) : (
-            shops.map((shop: any) => (
-              <div className="w-1/2">
-                <ShopList key={shop.id} shop={shop} />
-              </div>
-            ))
+            <div className="flex flex-col items-center gap-3 w-full px-5">
+              {shops.map((shop: any) => (
+                <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
+                  <ShopList shop={shop} />
+                </div>
+              ))}
+            </div>
           )}
 
           {totalPages > 1 && (

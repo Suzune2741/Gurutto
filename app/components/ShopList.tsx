@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
-
+/**
+ * 検索時の一覧表示用コンポーネント
+ * @param props
+ * @param props.shop APIから取得したデータ
+ */
 export const ShopList = ({ shop }: any) => {
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
