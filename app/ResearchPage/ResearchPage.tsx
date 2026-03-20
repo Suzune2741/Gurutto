@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MdPlace } from "react-icons/md";
 import { useNavigation, useSearchParams } from "react-router";
+import { DropDownList } from "~/components/DropDownList";
 import { Pagination } from "~/components/Pagination";
 import { SearchField } from "~/components/SearchField";
 import { ShopCard } from "~/components/ShopCard";
@@ -48,6 +49,10 @@ export const ResearchPage = ({
         <p className="text-xl ">現在地: {address ?? "取得中"}</p>
       </div>
       <SearchField lat={coords?.latitude} lng={coords?.longitude} />
+      <div className="flex flex-col items-center">
+        <p className="font-bold text-gray-700">表示件数</p>
+        <DropDownList />
+      </div>
       {isSearching && <p>検索中...</p>}
       {shops.length === 0 && !isSearching ? (
         <p>該当なし</p>
