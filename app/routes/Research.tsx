@@ -1,6 +1,18 @@
-import type { HotpepperResponse, Shop } from "~/types/hotpepper";
+import type { HotpepperResponse } from "~/types/hotpepper";
 import type { Route } from "./+types/Research";
 import { ResearchPage } from "~/ResearchPage/ResearchPage";
+
+// タブに表示されるタイトルを設定
+// loaderからキーワードを取得してあれば表示する
+export function meta({ location }: Route.MetaArgs) {
+  const searchParams = new URLSearchParams(location.search);
+  const keyword = searchParams.get("keyword");
+  const title = keyword
+    ? `${keyword}の検索結果 | ぐるっと`
+    : "お店を探す | ぐるっと";
+
+  return [{ title }];
+}
 
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
@@ -30,7 +42,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const totalItems = data.results?.results_available ?? 0;
 
   return {
-    shops: (data.results.shop) ?? [],
+    shops: data.results.shop ?? [],
     totalItems,
     currentPage: page,
     itemsPerPage: count,
