@@ -1,20 +1,11 @@
 import { MdPlace } from "react-icons/md";
 import { SearchField } from "../components/SearchField";
-import { useGeolocation } from "~/hooks/useGeolocation";
-import { reverseGeocode } from "~/utils/reverseGeocoder";
-import { useEffect, useState } from "react";
+import { useCurrentAddress } from "~/hooks/useCurrentAddress";
 /**
  * トップページ
  */
 export function Main() {
-  const { coords, error, loading } = useGeolocation();
-  const [address, setAddress] = useState<string | null>(null);
-  useEffect(() => {
-    if (!coords) return;
-    reverseGeocode(coords.latitude, coords.longitude)
-      .then((result) => setAddress(result.joinAddress))
-      .catch((error) => console.log(error));
-  }, [coords]);
+  const { coords, address, error, loading } = useCurrentAddress();
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-1/2 gap-5">
