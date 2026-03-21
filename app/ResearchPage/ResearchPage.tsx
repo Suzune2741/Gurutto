@@ -32,9 +32,10 @@ export const ResearchPage = ({
   const { coords, address, error, loading } = useCurrentAddress();
   const handlePageChange = (newPage: number) => {
     const newParams = new URLSearchParams(searchParams);
-    newParams.set("page", String(newPage));
-
-    setSearchParams(newParams);
+    setSearchParams((prevParams) => {
+      newParams.set("page", String(newPage));
+      return prevParams;
+    });
   };
 
   return (
@@ -45,8 +46,7 @@ export const ResearchPage = ({
         <p className="text-xl ">現在地: {address ?? "取得中"}</p>
       </div>
       <SearchField lat={coords?.latitude} lng={coords?.longitude} />
-      {isSearching && <p>検索中...</p>}
-      <>
+      {totalItems > 0 && !isSearching && (
         <div className="w-full flex justify-end px-0 min-[375px]:px-5 md:px-20 mb-2">
           <div className="flex flex-row items-center gap-4">
             <div className="flex items-center gap-1 bg-gray-200 p-1 rounded-md mt-auto">
@@ -86,34 +86,38 @@ export const ResearchPage = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center">
-          <p className="text-2xl">
-            {totalItems === 0 ? "該当なし" : `${totalItems}件ヒットしました`}
-          </p>
+      )}
+      <div className="flex flex-col items-center">
+        <p className="text-2xl">
+          {isSearching
+            ? "検索中..."
+            : totalItems === 0
+              ? "該当なし"
+              : `${totalItems}件ヒットしました`}
+        </p>
+      </div>
+      {viewStatus === "Card" ? (
+        <div className="flex flex-wrap gap-3 mx-5">
+          {shops.map((shop) => (
+            <ShopCard key={shop.id} shop={shop} />
+          ))}
         </div>
-        {viewStatus === "Card" ? (
-          <div className="flex flex-wrap gap-3 mx-5">
-            {shops.map((shop) => (
-              <ShopCard key={shop.id} shop={shop} />
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center gap-3 w-full px-5">
-            {shops.map((shop) => (
-              <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
-                <ShopList shop={shop} />
-              </div>
-            ))}
-          </div>
-        )}
-        {totalPages > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        )}
-      </>
+      ) : (
+        <div className="flex flex-col items-center gap-3 w-full px-5">
+          {shops.map((shop) => (
+            <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
+              <ShopList shop={shop} />
+            </div>
+          ))}
+        </div>
+      )}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 };
