@@ -1,5 +1,7 @@
+import type { HotpepperResponse, Shop } from "~/types/hotpepper";
 import type { Route } from "./+types/Research";
 import { ResearchPage } from "~/ResearchPage/ResearchPage";
+
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
   const keyword = searchParams.get("keyword") ?? "";
@@ -24,11 +26,11 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   url.searchParams.set("start", String(start));
 
   const res = await fetch(url.toString());
-  const data = (await res.json()) as any;
+  const data = (await res.json()) as HotpepperResponse;
   const totalItems = data.results?.results_available ?? 0;
 
   return {
-    shops: data.results.shop ?? [],
+    shops: (data.results.shop) ?? [],
     totalItems,
     currentPage: page,
     itemsPerPage: count,

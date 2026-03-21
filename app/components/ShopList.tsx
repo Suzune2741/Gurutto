@@ -1,12 +1,16 @@
 import { Link } from "react-router";
+import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
+type Props = {
+  shop: Shop;
+};
 /**
  * 検索時の一覧表示用コンポーネント
  * @param props
  * @param props.shop APIから取得したデータ
  */
-export const ShopList = ({ shop }: any) => {
+export const ShopList = ({ shop }: Props) => {
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
   return (

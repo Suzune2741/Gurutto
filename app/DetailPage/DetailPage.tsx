@@ -2,10 +2,11 @@ import { FaRegClock } from "react-icons/fa6";
 import { MdOutlineCurrencyYen } from "react-icons/md";
 import { MdOutlinePlace } from "react-icons/md";
 import { Link } from "react-router";
+import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
 type Props = {
-  shop: any;
+  shop: Shop;
 };
 /**
  * 検索時の一覧表示用コンポーネント

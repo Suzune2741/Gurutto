@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MdPlace } from "react-icons/md";
 import { useNavigation, useSearchParams } from "react-router";
 import { DropDownList } from "~/components/DropDownList";
 import { Pagination } from "~/components/Pagination";
 import { SearchField } from "~/components/SearchField";
 import { ShopCard } from "~/components/ShopCard";
-import { useGeolocation } from "~/hooks/useGeolocation";
-import { reverseGeocode } from "~/utils/reverseGeocoder";
 import { FaListUl, FaTh } from "react-icons/fa";
 import { ShopList } from "~/components/ShopList";
 import { useCurrentAddress } from "~/hooks/useCurrentAddress";
+import type { Shop } from "~/types/hotpepper";
 
 type Props = {
-  shops: any;
+  shops: Shop[];
   totalItems: number;
   currentPage: number;
   itemsPerPage: number;
@@ -94,13 +93,13 @@ export const ResearchPage = ({
         </div>
         {viewStatus === "Card" ? (
           <div className="flex flex-wrap gap-3 mx-5">
-            {shops.map((shop: any) => (
+            {shops.map((shop) => (
               <ShopCard key={shop.id} shop={shop} />
             ))}
           </div>
         ) : (
           <div className="flex flex-col items-center gap-3 w-full px-5">
-            {shops.map((shop: any) => (
+            {shops.map((shop) => (
               <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
                 <ShopList shop={shop} />
               </div>
