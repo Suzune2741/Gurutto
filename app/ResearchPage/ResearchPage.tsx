@@ -54,74 +54,72 @@ export const ResearchPage = ({
       </div>
       <SearchField lat={coords?.latitude} lng={coords?.longitude} />
       {isSearching && <p>検索中...</p>}
-      {shops.length === 0 && !isSearching ? (
-        <p>該当なし</p>
-      ) : (
-        <>
-          <div className="w-full flex justify-end px-0 min-[375px]:px-5 md:px-20 mb-2">
-            <div className="flex flex-row items-center gap-4">
-              <div className="flex items-center gap-1 bg-gray-200 p-1 rounded-md mt-auto">
-                <button
-                  onClick={() => setViewStatus("Card")}
-                  className={`p-2 rounded ${
-                    viewStatus === "Card"
-                      ? "bg-white shadow text-blue-600"
-                      : "text-gray-500 hover:bg-gray-300"
-                  }`}
-                  title="カード表示"
-                >
-                  <FaTh size={20} />
-                </button>
-                <button
-                  onClick={() => setViewStatus("List")}
-                  className={`p-2 rounded ${
-                    viewStatus === "List"
-                      ? "bg-white shadow text-blue-600"
-                      : "text-gray-500 hover:bg-gray-300"
-                  }`}
-                  title="リスト表示"
-                >
-                  <FaListUl size={20} />
-                </button>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="font-bold text-gray-700">表示件数</p>
-                <DropDownList
-                  options={[
-                    { value: "10", label: "10件" },
-                    { value: "20", label: "20件" },
-                    { value: "50", label: "50件" },
-                    { value: "100", label: "100件" },
-                  ]}
-                />
-              </div>
+      <>
+        <div className="w-full flex justify-end px-0 min-[375px]:px-5 md:px-20 mb-2">
+          <div className="flex flex-row items-center gap-4">
+            <div className="flex items-center gap-1 bg-gray-200 p-1 rounded-md mt-auto">
+              <button
+                onClick={() => setViewStatus("Card")}
+                className={`p-2 rounded ${
+                  viewStatus === "Card"
+                    ? "bg-white shadow text-blue-600"
+                    : "text-gray-500 hover:bg-gray-300"
+                }`}
+                title="カード表示"
+              >
+                <FaTh size={20} />
+              </button>
+              <button
+                onClick={() => setViewStatus("List")}
+                className={`p-2 rounded ${
+                  viewStatus === "List"
+                    ? "bg-white shadow text-blue-600"
+                    : "text-gray-500 hover:bg-gray-300"
+                }`}
+                title="リスト表示"
+              >
+                <FaListUl size={20} />
+              </button>
+            </div>
+            <div className="flex flex-col items-center">
+              <p className="font-bold text-gray-700">表示件数</p>
+              <DropDownList
+                options={[
+                  { value: "10", label: "10件" },
+                  { value: "20", label: "20件" },
+                  { value: "50", label: "50件" },
+                  { value: "100", label: "100件" },
+                ]}
+              />
             </div>
           </div>
-          {viewStatus === "Card" ? (
-            <div className="flex flex-wrap gap-3 mx-5">
-              {shops.map((shop: any) => (
-                <ShopCard key={shop.id} shop={shop} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-3 w-full px-5">
-              {shops.map((shop: any) => (
-                <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
-                  <ShopList shop={shop} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {totalPages > 1 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-        </>
-      )}
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="text-2xl">{totalItems === 0 ?"該当なし" : `${totalItems}件ヒットしました`}</p>
+        </div>
+        {viewStatus === "Card" ? (
+          <div className="flex flex-wrap gap-3 mx-5">
+            {shops.map((shop: any) => (
+              <ShopCard key={shop.id} shop={shop} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-3 w-full px-5">
+            {shops.map((shop: any) => (
+              <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
+                <ShopList shop={shop} />
+              </div>
+            ))}
+          </div>
+        )}
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
+      </>
     </div>
   );
 };
