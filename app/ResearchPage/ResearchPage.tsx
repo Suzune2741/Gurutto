@@ -9,6 +9,7 @@ import { useGeolocation } from "~/hooks/useGeolocation";
 import { reverseGeocode } from "~/utils/reverseGeocoder";
 import { FaListUl, FaTh } from "react-icons/fa";
 import { ShopList } from "~/components/ShopList";
+import { useCurrentAddress } from "~/hooks/useCurrentAddress";
 
 type Props = {
   shops: any;
@@ -26,24 +27,16 @@ export const ResearchPage = ({
 }: Props) => {
   const navigation = useNavigation();
   const isSearching = navigation.state === "loading";
-  const { coords } = useGeolocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const [address, setAddress] = useState<string | null>(null);
   const [viewStatus, setViewStatus] = useState<ViewStatus>("Card");
-
+  const { coords, address, error, loading } = useCurrentAddress();
   const handlePageChange = (newPage: number) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set("page", String(newPage));
 
     setSearchParams(newParams);
   };
-  useEffect(() => {
-    if (!coords) return;
-    reverseGeocode(coords.latitude, coords.longitude)
-      .then((result) => setAddress(result.joinAddress))
-      .catch((error) => console.log(error));
-  }, [coords]);
 
   return (
     <div className="flex flex-col items-center my-5 gap-1 w-full">
@@ -95,7 +88,9 @@ export const ResearchPage = ({
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <p className="text-2xl">{totalItems === 0 ?"該当なし" : `${totalItems}件ヒットしました`}</p>
+          <p className="text-2xl">
+            {totalItems === 0 ? "該当なし" : `${totalItems}件ヒットしました`}
+          </p>
         </div>
         {viewStatus === "Card" ? (
           <div className="flex flex-wrap gap-3 mx-5">
