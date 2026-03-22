@@ -30,14 +30,20 @@ export const ResearchPage = ({
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const [viewStatus, setViewStatus] = useState<ViewStatus>("Card");
   const { coords, address, error, loading } = useCurrentAddress();
+
   const handlePageChange = (newPage: number) => {
     const newParams = new URLSearchParams(searchParams);
-    setSearchParams((prevParams) => {
-      newParams.set("page", String(newPage));
-      return prevParams;
-    });
+    newParams.set("page", String(newPage));
+    setSearchParams(newParams);
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+  const currentCount = searchParams.get("count") || "10";
+  const handleCountChange = (val: string) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("count", val);
+    newParams.set("page", "1");
+    setSearchParams(newParams);
+  };
   return (
     <div className="flex flex-col items-center my-5 gap-1 w-full">
       <p className="text-xl">検索する</p>
@@ -54,10 +60,10 @@ export const ResearchPage = ({
             <div className="flex items-center gap-1 bg-gray-200 p-1 rounded-md mt-auto">
               <button
                 onClick={() => setViewStatus("Card")}
-                className={`p-2 rounded ${
+                className={`p-2 rounded transition-colors ${
                   viewStatus === "Card"
-                    ? "bg-white shadow text-blue-600"
-                    : "text-gray-500 hover:bg-gray-300"
+                    ? "bg-white shadow-sm text-orange-500"
+                    : "text-gray-500 hover:bg-gray-200"
                 }`}
                 title="カード表示"
               >
@@ -65,10 +71,10 @@ export const ResearchPage = ({
               </button>
               <button
                 onClick={() => setViewStatus("List")}
-                className={`p-2 rounded ${
+                className={`p-2 rounded transition-colors ${
                   viewStatus === "List"
-                    ? "bg-white shadow text-blue-600"
-                    : "text-gray-500 hover:bg-gray-300"
+                    ? "bg-white shadow-sm text-orange-500"
+                    : "text-gray-500 hover:bg-gray-200"
                 }`}
                 title="リスト表示"
               >
@@ -78,6 +84,8 @@ export const ResearchPage = ({
             <div className="flex flex-col items-center">
               <p className="font-bold text-gray-700">表示件数</p>
               <DropDownList
+                value={currentCount}
+                onChange={handleCountChange}
                 options={[
                   { value: "10", label: "10件" },
                   { value: "20", label: "20件" },

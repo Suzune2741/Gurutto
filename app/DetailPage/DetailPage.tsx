@@ -50,7 +50,9 @@ export const DetailPage = ({ shop }: Props) => {
               <FaRegClock className="mt-1 shrink-0" />
               <p className="text-xl">営業時間</p>
             </div>
-            <p className="wrap-break-word">{formattedOpen}</p>
+            <p className="wrap-break-word whitespace-pre-wrap">
+              {formattedOpen}
+            </p>
           </div>
           <p className="text-xl text-wrap flex flex-row items-center">
             <MdOutlineCurrencyYen />
@@ -58,10 +60,12 @@ export const DetailPage = ({ shop }: Props) => {
             {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
         </div>
-        <FavoriteButton
-          isFavorite={isSaved}
-          onClick={() => clickFavorite(shop)}
-        />
+        <div className="shrink-0 mt-2">
+          <FavoriteButton
+            isFavorite={isSaved}
+            onClick={() => clickFavorite(shop)}
+          />
+        </div>
       </div>
       <div className="mb-3">
         <p className="flex justify-center text-xl font-bold mb-1.5">店舗写真</p>
