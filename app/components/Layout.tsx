@@ -15,7 +15,7 @@ export default function Layout() {
             <Link
               key={item.name}
               to={item.path}
-              className="block hover:underline"
+              className="block font-medium  hover:text-orange-500 hover:opacity-100 transition-colors duration-300"
             >
               {item.name}
             </Link>
