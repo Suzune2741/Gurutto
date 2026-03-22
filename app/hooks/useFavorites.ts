@@ -19,9 +19,7 @@ export const useFavorites = () => {
     setFavorites((prevFavorites) => {
       const isExist = prevFavorites.some((item) => item.id === shop.id);
       const updateFavorites = isExist
-        ? prevFavorites.filter((item) => {
-            item.id !== shop.id;
-          })
+        ? prevFavorites.filter((item) => item.id !== shop.id)
         : [shop, ...prevFavorites];
       localStorage.setItem("favorites", JSON.stringify(updateFavorites));
       return updateFavorites;

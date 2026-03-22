@@ -3,7 +3,13 @@ import { Outlet, Link } from "react-router";
  * ヘッダーとフッターを記述する
  */
 export default function Layout() {
-  const menuItems = [{ name: "さがす", path: "/research" }];
+  const menuItems = [
+    { name: "さがす", path: "/research" },
+    {
+      name: "お気に入り",
+      path: "/favorites",
+    },
+  ];
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex justify-between items-center p-4 bg-amber-200">

@@ -10,6 +10,6 @@ export default [
     index("routes/Home.tsx"),
     route("/research", "routes/Research.tsx"),
     route("/research/:id", "routes/ShopDetailPage.tsx"),
-    route("/settings", "routes/Settings.tsx"),
+    route("/favorites", "routes/Favorites.tsx"),
   ]),
 ] satisfies RouteConfig;
