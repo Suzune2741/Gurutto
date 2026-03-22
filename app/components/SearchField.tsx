@@ -39,7 +39,7 @@ export const SearchField = ({ lat, lng }: Props) => {
           />
           <Button
             type="submit"
-            icon={<IoSearchSharp />}
+            icon={<IoSearchSharp size={18}/>}
             className="bg-red-500 hover:bg-red-700"
           >
             検索

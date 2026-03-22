@@ -42,8 +42,10 @@ export const ResearchPage = ({
     <div className="flex flex-col items-center my-5 gap-1 w-full">
       <p className="text-xl">検索する</p>
       <div className="flex flex-row items-center border rounded-3xl mt-1 px-3 w-fit">
-        <MdPlace size={20} />
-        <p className="text-xl ">現在地: {address ?? "取得中"}</p>
+        <MdPlace size={22} className=" text-red-500 shrink-0" />
+        <p className="text-xl ml-1">
+          {loading ? "現在地を取得中" : (address ?? "未取得")}
+        </p>
       </div>
       <SearchField lat={coords?.latitude} lng={coords?.longitude} />
       {totalItems > 0 && !isSearching && (
@@ -87,7 +89,7 @@ export const ResearchPage = ({
           </div>
         </div>
       )}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center my-2">
         <p className="text-2xl">
           {isSearching
             ? "検索中..."

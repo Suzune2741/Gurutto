@@ -28,7 +28,7 @@ export const DropDownList = ({ options }: Props) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 my-5 mb-0">
+    <div className="flex flex-col items-center gap-2 mb-0">
       <div className="relative">
         <select
           value={currentCount}
