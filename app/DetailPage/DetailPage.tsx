@@ -2,6 +2,8 @@ import { FaRegClock } from "react-icons/fa6";
 import { MdOutlineCurrencyYen } from "react-icons/md";
 import { MdOutlinePlace } from "react-icons/md";
 import { Link } from "react-router";
+import { FavoriteButton } from "~/components/FavoriteButton";
+import { useFavoritesContext } from "~/contexts/FavoritesContext";
 import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
@@ -22,6 +24,8 @@ export const DetailPage = ({ shop }: Props) => {
     /(\d{2}:\d{2}|[）)])\s*([月火水木金土日祝])/g,
     "$1\n$2",
   );
+  const { clickFavorite, isFavorite } = useFavoritesContext();
+  const isSaved = isFavorite(shop.id);
   return (
     <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
@@ -54,6 +58,10 @@ export const DetailPage = ({ shop }: Props) => {
             {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
         </div>
+        <FavoriteButton
+          isFavorite={isSaved}
+          onClick={() => clickFavorite(shop)}
+        />
       </div>
       <div className="mb-3">
         <p className="flex justify-center text-xl font-bold mb-1.5">店舗写真</p>
@@ -79,7 +87,7 @@ export const DetailPage = ({ shop }: Props) => {
           className="border-0 rounded-lg shadow-md"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
       </div>
       <div className="w-full flex justify-end px-7 mt-5 mb-10">
         <Link
