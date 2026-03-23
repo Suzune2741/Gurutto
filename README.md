@@ -1,79 +1,93 @@
-# Welcome to React Router!
+## ぐるっと
 
-A modern, production-ready template for building full-stack React applications using React Router.
+### コンセプト
 
-## Features
+現在地に近いお店をすぐに見つけられることのできるアプリ。
+お気に入りの店を保存し何度でも通えるようにする。
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+### こだわったポイント
 
-## Getting Started
+飲食店を検索するアプリなので暖色を意識して使うようにしたところ。
 
-### Installation
+## 開発環境
 
-Install the dependencies:
+### 開発言語
 
-```bash
-npm install
-```
+- Type Script
 
-### Development
+### 環境構築手順
 
-Start the development server with HMR:
+1. リポジトリをクローン
 
 ```bash
-npm run dev
+    git clone https://github.com/Suzune2741/Gurutto.git
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Previewing the Production Build
-
-Preview the production build locally:
+2. 依存関係のインストール
 
 ```bash
-npm run preview
+    pnpm i
 ```
 
-## Building for Production
-
-Create a production build:
+3. 開発サーバーの起動
 
 ```bash
-npm run build
+    pnpm run dev
 ```
 
-## Deployment
+`http://localhost:5173`で動作します。
 
-Deployment is done using the Wrangler CLI.
+4. ビルド
 
-To build and deploy directly to production:
-
-```sh
-npm run deploy
+```bash
+    pnpm run build
 ```
 
-To deploy a preview URL:
+### デプロイ
 
-```sh
-npx wrangler versions upload
+#### 本番環境に直接デプロイ
+
+```bash
+    pnpm run deploy
 ```
 
-You can then promote a version to production after verification or roll it out progressively.
+#### プレビューURLをデプロイ
 
-```sh
-npx wrangler versions deploy
+```bash
+    npx wrangler versions upload
 ```
 
-## Styling
+#### バージョンを本番環境に昇格
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+```bash
+    npx wrangler versions deploy
+```
 
----
+### 対象としている端末
 
-Built with ❤️ using React Router.
+- PC(Windows,MacOS)
+
+## アプリケーション機能
+
+- 飲食店の検索: ホットペッパーグルメリサーチAPIを利用して、現在地周辺の飲食店を検索する。
+- レストラン情報取得: ホットペッパーグルメリサーチAPIを使用して、飲食店の詳細情報を取得する.
+- お気に入り機能: お気に入り機能により飲食店を保存できる。
+
+### 画面一覧
+
+- トップページ: 飲食店の検索を行う。
+- 検索&検索結果画面: 検索結果を一覧表示する。カード表示とリスト表示を選択可能。
+- 店舗詳細画面: 店舗の詳細を表示する。
+- お気に入り一覧: お気に入りに登録した店舗の一覧を表示する。
+
+### 使用しているAPI,ライブラリ等
+- API
+    - ホットペッパーグルメサーチAPI
+    - Geolocation API
+    - localStorage API
+    - 国土地理院API
+- ライブラリ
+    - React
+    - React Router(v7)
+    - React Icons
+    - Tailwind CSS
