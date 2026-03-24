@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./public/Logo.svg" alt="ロゴ" width="300" />
+</div>
+
 ## ぐるっと
 
 ### コンセプト
@@ -81,13 +85,14 @@
 - お気に入り一覧: お気に入りに登録した店舗の一覧を表示する。
 
 ### 使用しているAPI,ライブラリ等
+
 - API
-    - ホットペッパーグルメサーチAPI
-    - Geolocation API
-    - localStorage API
-    - 国土地理院API
+  - ホットペッパーグルメサーチAPI
+  - Geolocation API
+  - localStorage API
+  - 国土地理院API
 - ライブラリ
-    - React
-    - React Router(v7)
-    - React Icons
-    - Tailwind CSS
+  - React
+  - React Router(v7)
+  - React Icons
+  - Tailwind CSS
