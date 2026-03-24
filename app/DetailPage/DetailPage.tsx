@@ -2,21 +2,30 @@ import { FaRegClock } from "react-icons/fa6";
 import { MdOutlineCurrencyYen } from "react-icons/md";
 import { MdOutlinePlace } from "react-icons/md";
 import { Link } from "react-router";
+import { FavoriteButton } from "~/components/FavoriteButton";
+import { useFavoritesContext } from "~/contexts/FavoritesContext";
+import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
 type Props = {
-  shop: any;
+  shop: Shop;
 };
+/**
+ * 検索時の一覧表示用コンポーネント
+ * @param props
+ * @param props.shop APIから取得したデータ
+ */
 export const DetailPage = ({ shop }: Props) => {
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
-  console.log(shop);
   // 営業時間の文章が長いので区切る
   // 区切りにスペースがある場合とない場合があるので正規表現で対策
   const formattedOpen = shop.open.replace(
     /(\d{2}:\d{2}|[）)])\s*([月火水木金土日祝])/g,
     "$1\n$2",
   );
+  const { clickFavorite, isFavorite } = useFavoritesContext();
+  const isSaved = isFavorite(shop.id);
   return (
     <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
@@ -41,13 +50,21 @@ export const DetailPage = ({ shop }: Props) => {
               <FaRegClock className="mt-1 shrink-0" />
               <p className="text-xl">営業時間</p>
             </div>
-            <p className="wrap-break-word">{formattedOpen}</p>
+            <p className="wrap-break-word whitespace-pre-wrap">
+              {formattedOpen}
+            </p>
           </div>
           <p className="text-xl text-wrap flex flex-row items-center">
             <MdOutlineCurrencyYen />
             平均金額:
             {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
+        </div>
+        <div className="shrink-0 mt-2">
+          <FavoriteButton
+            isFavorite={isSaved}
+            onClick={() => clickFavorite(shop)}
+          />
         </div>
       </div>
       <div className="mb-3">
@@ -74,7 +91,7 @@ export const DetailPage = ({ shop }: Props) => {
           className="border-0 rounded-lg shadow-md"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
       </div>
       <div className="w-full flex justify-end px-7 mt-5 mb-10">
         <Link

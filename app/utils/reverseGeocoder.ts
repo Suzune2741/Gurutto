@@ -1,16 +1,26 @@
 import MUNI_ARRAY from "~/utils/muni.ts";
+
 export type Address = {
   prefecture: string;
   city: string;
   town: string;
   joinAddress: string;
 };
+
 type GsiResponse = {
   results: {
     muniCd: string; // 市区町村コード
-    lv01Nm: string; // 都道府県 + 市区町村
+    lv01Nm: string; // 町丁目名称
   };
 };
+
+/**
+ * 緯度と経度から住所情報を取得する関数（逆ジオコーディング）
+ * 国土地理院のAPIを使用し、都道府県・市区町村・町域を組み立てて返します。
+ * @param lat 緯度
+ * @param lng 経度
+ * @returns 取得した住所情報（Addressオブジェクト）を返すPromise
+ */
 export const reverseGeocode = async (
   lat: number,
   lng: number,

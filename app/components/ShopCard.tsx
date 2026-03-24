@@ -1,18 +1,21 @@
 import { Link } from "react-router";
+import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
 import { getNowOpen } from "~/utils/getNowOpen";
-
+type Props = {
+  shop: Shop;
+};
 /**
  * 検索時の一覧表示用コンポーネント
  * @param props
  * @param props.shop APIから取得したデータ
  */
-export const ShopCard = ({ shop }: any) => {
+export const ShopCard = ({ shop }: Props) => {
   const date = getDate();
   const nowOpen = getNowOpen(date, shop.open);
   return (
     <Link to={`/research/${shop.id}`}>
-      <div className="rounded overflow-hidden shadow-lg flex flex-row w-80 h-40 my-2 bg-[#fff9f2] hover:bg-[#f5ede0] transition-all ">
+      <div className="rounded overflow-hidden shadow-lg flex flex-row w-80 h-40 my-2 bg-[#fff9f2] hover:bg-[#f5ede0] transition-all">
         <img
           className="object-cover w-40 h-40 shrink-0 "
           src={shop.logo_image}

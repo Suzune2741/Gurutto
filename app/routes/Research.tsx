@@ -1,5 +1,19 @@
+import type { HotpepperResponse } from "~/types/hotpepper";
 import type { Route } from "./+types/Research";
 import { ResearchPage } from "~/ResearchPage/ResearchPage";
+
+// タブに表示されるタイトルを設定
+// loaderからキーワードを取得してあれば表示する
+export function meta({ location }: Route.MetaArgs) {
+  const searchParams = new URLSearchParams(location.search);
+  const keyword = searchParams.get("keyword");
+  const title = keyword
+    ? `${keyword}の検索結果 | ぐるっと`
+    : "お店を探す | ぐるっと";
+
+  return [{ title }];
+}
+
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
   const keyword = searchParams.get("keyword") ?? "";
@@ -24,7 +38,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   url.searchParams.set("start", String(start));
 
   const res = await fetch(url.toString());
-  const data = (await res.json()) as any;
+  const data = (await res.json()) as HotpepperResponse;
   const totalItems = data.results?.results_available ?? 0;
 
   return {

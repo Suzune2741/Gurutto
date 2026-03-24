@@ -1,5 +1,16 @@
+import type { HotpepperResponse } from "~/types/hotpepper";
 import type { Route } from "./+types/ShopDetailPage";
 import { DetailPage } from "~/DetailPage/DetailPage";
+
+// タブに表示されるタイトルを設定
+// 店舗情報を受け取って表示
+export function meta({ loaderData }: Route.MetaArgs) {
+  const title = loaderData?.shop?.name
+    ? `${loaderData.shop.name} | ぐるっと`
+    : "店舗詳細 | ぐるっと";
+
+  return [{ title }];
+}
 
 export async function loader({ params, context }: Route.LoaderArgs) {
   const url = new URL("https://webservice.recruit.co.jp/hotpepper/gourmet/v1/");
@@ -8,7 +19,7 @@ export async function loader({ params, context }: Route.LoaderArgs) {
   url.searchParams.set("format", "json");
 
   const res = await fetch(url.toString());
-  const data = (await res.json()) as any;
+  const data = (await res.json()) as HotpepperResponse;
 
   const shop = data.results.shop?.[0];
   if (!shop) throw new Response("Not Found", { status: 404 });
