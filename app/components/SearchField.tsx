@@ -37,13 +37,27 @@ export const SearchField = ({ lat, lng }: Props) => {
             name="count"
             value={searchParams.get("count") || "10"}
           />
-          <Button
-            type="submit"
-            icon={<IoSearchSharp size={18}/>}
-            className="bg-red-500 hover:bg-red-700"
-          >
-            検索
-          </Button>
+          {/*スマホとPCでボタンサイズを変更させる*/}
+          <div className="block md:hidden">
+            <Button
+              type="submit"
+              icon={<IoSearchSharp size={18} />}
+              className="bg-red-500 hover:bg-red-700 w-full"
+              size="sm" 
+            >
+              検索
+            </Button>
+          </div>
+          <div className="hidden md:block">
+            <Button
+              type="submit"
+              icon={<IoSearchSharp size={18} />}
+              className="bg-red-500 hover:bg-red-700"
+              size="md"
+            >
+              検索
+            </Button>
+          </div>
         </div>
       </div>
     </Form>
