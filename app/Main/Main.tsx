@@ -5,7 +5,7 @@ import { useCurrentAddress } from "~/hooks/useCurrentAddress";
  * トップページ
  */
 export function Main() {
-  const { coords, address, error, loading } = useCurrentAddress();
+  const { coords, address, loading } = useCurrentAddress();
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-1/2 gap-5">

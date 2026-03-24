@@ -17,7 +17,12 @@ type Props = {
   itemsPerPage: number;
 };
 type ViewStatus = "Card" | "List";
-
+const COUNT_OPTIONS = [
+  { value: "10", label: "10件" },
+  { value: "20", label: "20件" },
+  { value: "50", label: "50件" },
+  { value: "100", label: "100件" },
+];
 export const ResearchPage = ({
   shops,
   totalItems,
@@ -29,13 +34,12 @@ export const ResearchPage = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const [viewStatus, setViewStatus] = useState<ViewStatus>("Card");
-  const { coords, address, error, loading } = useCurrentAddress();
+  const { coords, address, loading } = useCurrentAddress();
 
   const handlePageChange = (newPage: number) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set("page", String(newPage));
     setSearchParams(newParams);
-    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const currentCount = searchParams.get("count") || "10";
   const handleCountChange = (val: string) => {
@@ -86,12 +90,7 @@ export const ResearchPage = ({
               <DropDownList
                 value={currentCount}
                 onChange={handleCountChange}
-                options={[
-                  { value: "10", label: "10件" },
-                  { value: "20", label: "20件" },
-                  { value: "50", label: "50件" },
-                  { value: "100", label: "100件" },
-                ]}
+                options={COUNT_OPTIONS}
               />
             </div>
           </div>
