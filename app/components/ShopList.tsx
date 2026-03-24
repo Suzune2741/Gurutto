@@ -23,7 +23,7 @@ export const ShopList = ({ shop }: Props) => {
         />
         <div className="p-3 flex flex-col min-w-0 overflow-hidden w-full">
           <div>
-            <div className="font-bold text-lg text-gray-900 mb-1 line-clamp-1 md:line-clamp-2 wrap-break-word">
+            <div className="font-bold text-sm md:text-lg text-gray-900 mb-1 wrap-break-word">
               {shop.name}
             </div>
             <div className="text-gray-500 text-sm line-clamp-2 wrap-break-word overflow-hidden">

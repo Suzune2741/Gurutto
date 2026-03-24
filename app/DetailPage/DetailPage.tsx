@@ -29,43 +29,54 @@ export const DetailPage = ({ shop }: Props) => {
   return (
     <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
-      <div className="flex flex-row gap-10">
-        <div className="flex flex-col items-center">
+      <div className="flex flex-col-reverse ml-3 md:flex-row gap-10">
+        <div className="hidden md:flex md:flex-col md:items-center">
           <img
-            className="object-contain w-50 h-50 shrink-0 "
+            className="object-contain w-20 h-20 md:w-50 md:h-50 shrink-0"
             src={shop.logo_image}
             alt={shop.name}
           />
-          <p className="text-2xl font-bold">{nowOpen ? "営業中" : "準備中"}</p>
+          <p className="text-md md:text-2xl font-bold">
+            {nowOpen ? "営業中" : "準備中"}
+          </p>
         </div>
         <div>
-          <p className="text-2xl font-bold">{shop.catch}</p>
-          <p className="text-2xl font-bold">{shop.name}</p>
-          <p className="text-xl flex flex-row items-center">
+          <p className="text-lg md:text-2xl font-bold">{shop.catch}</p>
+          <p className="text-lg md:text-2xl font-bold">{shop.name}</p>
+          <p className="text-sm md:text-xl flex flex-row items-center">
             <MdOutlinePlace />
             住所:{shop.address}
           </p>
           <div className="flex flex-col items-start gap-1  text-xl">
             <div className="flex flex-row">
-              <FaRegClock className="mt-1 shrink-0" />
-              <p className="text-xl">営業時間</p>
+              <FaRegClock className="mt-1 shrink-0 size-3 md:size-5" />
+              <p className="text-sm md:text-xl">営業時間</p>
             </div>
-            <p className="wrap-break-word whitespace-pre-wrap">
+            <p className="wrap-break-word whitespace-pre-wrap text-sm md:text-lg">
               {formattedOpen}
             </p>
+            <p className="text-sm md:hidden">
+              {nowOpen ? "現在営業中" : "現在準備中"}
+            </p>
           </div>
-          <p className="text-xl text-wrap flex flex-row items-center">
+          <p className="text-sm md:text-xl text-wrap flex flex-row items-center">
             <MdOutlineCurrencyYen />
             平均金額:
             {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
         </div>
-        <div className="shrink-0 mt-2">
+        <div className="shrink-0 hidden md:block">
           <FavoriteButton
             isFavorite={isSaved}
             onClick={() => clickFavorite(shop)}
           />
         </div>
+      </div>
+      <div className="shrink-0 mt-3 md:hidden">
+        <FavoriteButton
+          isFavorite={isSaved}
+          onClick={() => clickFavorite(shop)}
+        />
       </div>
       <div className="mb-3">
         <p className="flex justify-center text-xl font-bold mb-1.5">店舗写真</p>
@@ -79,16 +90,16 @@ export const DetailPage = ({ shop }: Props) => {
         </picture>
       </div>
       <div className="w-full max-w-md my-5">
-        <div className="flex flex-col justify-center items-center text-xl mb-2 gap-1">
-          <p className="font-bold">店舗位置</p>
-          <p>{shop.access}</p>
+        <div className="flex flex-col justify-center items-center mb-2 gap-1">
+          <p className="font-bold text-xl ">店舗位置</p>
+          <p className="text-md md:text-xl">{shop.access}</p>
         </div>
         <iframe
           title="shop-map"
           src={`https://maps.google.com/maps?q=${shop.lat},${shop.lng}&z=15&output=embed`}
           width="100%"
           height="300"
-          className="border-0 rounded-lg shadow-md"
+          className="border-0 rounded-lg shadow-md mt-5 md:mt-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
