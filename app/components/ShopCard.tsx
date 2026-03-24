@@ -15,9 +15,9 @@ export const ShopCard = ({ shop }: Props) => {
   const nowOpen = getNowOpen(date, shop.open);
   return (
     <Link to={`/research/${shop.id}`}>
-      <div className="rounded overflow-hidden shadow-lg flex flex-row w-80 h-40 my-2 bg-[#fff9f2] hover:bg-[#f5ede0] transition-all">
+      <div className="rounded overflow-hidden shadow-lg flex flex-row md:w-80 md:h-40 my-2 bg-[#fff9f2] hover:bg-[#f5ede0] transition-all">
         <img
-          className="object-cover w-40 h-40 shrink-0 "
+          className="object-cover w-24 md:w-40 h-24 md:h-40 shrink-0 "
           src={shop.logo_image}
           alt={shop.name}
         />
