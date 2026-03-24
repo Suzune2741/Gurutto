@@ -1,6 +1,7 @@
 import { Outlet, Link } from "react-router";
 /**
  * ヘッダーとフッターを記述する
+ * 今回はヘッダのみ、必要に応じてフッターを記述する
  */
 export default function Layout() {
   const menuItems = [
@@ -14,7 +15,13 @@ export default function Layout() {
     <div className="flex flex-col min-h-screen">
       <header className="flex justify-between items-center p-4 bg-amber-200">
         <span className="text-3xl ml-5">
-          <Link to="/">Gurutto</Link>
+          <Link to="/">
+            <img
+              src="./Logo.svg "
+              alt="ぐるっとのロゴ"
+              className="h-6 md:h-12 w-auto"
+            />
+          </Link>
         </span>
         <nav className="flex gap-10 mr-2">
           {menuItems.map((item) => (
@@ -31,9 +38,6 @@ export default function Layout() {
       <main className="grow flex justify-center">
         <Outlet />
       </main>
-      <footer className="flex justify-center p-2 text-gray-500 dark:text-gray-400">
-        <p className="text-sm">© 2026 Suzune</p>
-      </footer>
     </div>
   );
 }
