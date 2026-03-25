@@ -6,6 +6,7 @@ import { FavoriteButton } from "~/components/FavoriteButton";
 import { useFavoritesContext } from "~/contexts/FavoritesContext";
 import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
+import { getGenreIcon } from "~/utils/getGenreIcon";
 import { getNowOpen } from "~/utils/getNowOpen";
 type Props = {
   shop: Shop;
@@ -26,6 +27,7 @@ export const DetailPage = ({ shop }: Props) => {
   );
   const { clickFavorite, isFavorite } = useFavoritesContext();
   const isSaved = isFavorite(shop.id);
+  const favoriteIcon = getGenreIcon(shop.genre.name, isSaved, 20);
   return (
     <div className="flex flex-col items-center w-full">
       <p className="text-3xl my-5 font-bold">店舗詳細</p>
@@ -67,6 +69,7 @@ export const DetailPage = ({ shop }: Props) => {
         </div>
         <div className="shrink-0 hidden md:block">
           <FavoriteButton
+            icon={favoriteIcon}
             isFavorite={isSaved}
             onClick={() => clickFavorite(shop)}
           />
@@ -74,6 +77,7 @@ export const DetailPage = ({ shop }: Props) => {
       </div>
       <div className="shrink-0 mt-3 md:hidden">
         <FavoriteButton
+          icon={favoriteIcon}
           isFavorite={isSaved}
           onClick={() => clickFavorite(shop)}
         />

@@ -17,7 +17,7 @@ export default function Layout() {
         <span className="text-3xl md:ml-5">
           <Link to="/">
             <img
-              src="./Logo.svg "
+              src="./Logo.svg"
               alt="ぐるっとのロゴ"
               className="h-6 md:h-12 w-auto"
             />
