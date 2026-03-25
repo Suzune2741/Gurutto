@@ -16,6 +16,7 @@ export type Shop = {
   logo_image: string;
   lat: number;
   lng: number;
+  genre: { name: string };
   catch: string;
   budget: { name: string };
   photo: { pc: { l: string }; mobile: { l: string } };
