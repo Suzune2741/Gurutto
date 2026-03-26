@@ -14,7 +14,7 @@ export const Slider = () => {
     { label: "3km", distance: 5 },
   ];
   return (
-    <div className="max-w-xs">
+    <div className="w-full max-w-sm mx-auto">
       <input type="hidden" name="radius" value={steps[index].distance} />
       <input
         type="range"
