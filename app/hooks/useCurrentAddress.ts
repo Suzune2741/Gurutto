@@ -22,7 +22,7 @@ export const useCurrentAddress = (): UseCurrentAddressReturn => {
     if (!coords) return;
     reverseGeocode(coords.latitude, coords.longitude)
       .then((result) => setAddress(result.joinAddress))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, [coords]);
   return { coords, address, error, loading };
 };

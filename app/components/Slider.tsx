@@ -14,7 +14,7 @@ export const Slider = () => {
     { label: "3km", distance: 5 },
   ];
   return (
-    <div className="max-w-xs">
+    <div className="w-full max-w-sm mx-auto">
       <input type="hidden" name="radius" value={steps[index].distance} />
       <input
         type="range"
@@ -27,12 +27,10 @@ export const Slider = () => {
       />
       <div className="flex w-full justify-between px-2 mt-1">
         {steps.map((step, i) => (
-          <>
-            <span key={step.label} className="flex flex-col items-center w-0 ">
-              <span>|</span>
-              {step.label}
-            </span>
-          </>
+          <span key={step.label} className="flex flex-col items-center w-0 ">
+            <span>|</span>
+            {step.label}
+          </span>
         ))}
       </div>
     </div>

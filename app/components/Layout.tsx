@@ -14,16 +14,16 @@ export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex justify-between items-center p-4 bg-amber-200">
-        <span className="text-3xl ml-5">
+        <span className="text-3xl md:ml-5">
           <Link to="/">
             <img
-              src="./Logo.svg "
+              src="./Logo.svg"
               alt="ぐるっとのロゴ"
               className="h-6 md:h-12 w-auto"
             />
           </Link>
         </span>
-        <nav className="flex gap-10 mr-2">
+        <nav className="flex gap-4 md:gap-10 md:mr-2">
           {menuItems.map((item) => (
             <Link
               key={item.name}
