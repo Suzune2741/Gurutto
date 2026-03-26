@@ -13,7 +13,15 @@ export function meta({ location }: Route.MetaArgs) {
 
   return [{ title }];
 }
-
+const CONDITIONS: string[] = [
+  "private_room",
+  "free_drink",
+  "parking",
+  "lunch",
+  "free_food",
+  "card",
+  "child",
+];
 export async function loader({ request, context }: Route.LoaderArgs) {
   const { searchParams } = new URL(request.url);
   const keyword = searchParams.get("keyword") ?? "";
@@ -23,9 +31,6 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const page = Number(searchParams.get("page") || "1");
   const count = Number(searchParams.get("count") || "10");
   const start = (page - 1) * count + 1;
-
-  if (!keyword)
-    return { shops: [], totalItems: 0, currentPage: 1, itemsPerPage: count };
 
   const url = new URL("https://webservice.recruit.co.jp/hotpepper/gourmet/v1/");
   url.searchParams.set("key", context.cloudflare.env.API_KEY);
@@ -37,6 +42,12 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   url.searchParams.set("count", String(count));
   url.searchParams.set("start", String(start));
 
+  CONDITIONS.forEach((condition) => {
+    const value = searchParams.get(condition);
+    if (value === "1") {
+      url.searchParams.set(condition, "1");
+    }
+  });
   const res = await fetch(url.toString());
   const data = (await res.json()) as HotpepperResponse;
   const totalItems = data.results?.results_available ?? 0;

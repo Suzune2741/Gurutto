@@ -106,13 +106,13 @@ export const ResearchPage = ({
         </p>
       </div>
       {viewStatus === "Card" ? (
-        <div className="flex flex-wrap gap-3 mx-5">
+        <div className="flex flex-wrap justify-center gap-3 mx-5">
           {shops.map((shop) => (
             <ShopCard key={shop.id} shop={shop} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-3 w-full px-5">
+        <div className="flex flex-col justify-center items-center gap-3 w-full px-5">
           {shops.map((shop) => (
             <div key={shop.id} className="w-full md:w-2/3 lg:w-1/2">
               <ShopList shop={shop} />
