@@ -4,6 +4,7 @@ type ButtonSize = "sm" | "md" | "lg";
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSize;
   icon?: ReactNode;
+  type: string;
 };
 const sizeClass: Record<ButtonSize, string> = {
   sm: "text-xs px-3 py-1.5 rounded-lg",
@@ -15,23 +16,25 @@ const sizeClass: Record<ButtonSize, string> = {
  * @param props
  * @param props.size ボタンのサイズ（"sm" | "md" | "lg" ,デフォルトは "md"）
  * @param props.icon ボタン内に表示するアイコン要素
+ * @param props.type ボタンタイプ
  * @param props.className 追加のCSSクラス
  * @param props.children ボタンのテキストや内包する要素
  */
 export const Button = ({
   size = "md",
   icon,
+  type,
   className = "",
   children,
   ...props
 }: Props) => {
   return (
     <button
-      type="submit"
+      type={type || "button"}
       className={[
-        "h-11 text-white font-medium transition-colors flex items-center gap-2",
+        "h-11  font-medium transition-colors flex items-center gap-2",
         sizeClass[size],
-        className
+        className,
       ].join(" ")}
       {...props}
     >
