@@ -32,7 +32,7 @@ export const Button = ({
     <button
       type={type || "button"}
       className={[
-        "h-11 text-white font-medium transition-colors flex items-center gap-2",
+        "h-11  font-medium transition-colors flex items-center gap-2",
         sizeClass[size],
         className,
       ].join(" ")}

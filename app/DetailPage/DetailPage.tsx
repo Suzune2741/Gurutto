@@ -3,6 +3,7 @@ import { MdOutlineCurrencyYen } from "react-icons/md";
 import { MdOutlinePlace } from "react-icons/md";
 import { Link } from "react-router";
 import { FavoriteButton } from "~/components/FavoriteButton";
+import { ShareButton } from "~/components/ShareButton";
 import { useFavoritesContext } from "~/contexts/FavoritesContext";
 import type { Shop } from "~/types/hotpepper";
 import { getDate } from "~/utils/getDate";
@@ -67,20 +68,22 @@ export const DetailPage = ({ shop }: Props) => {
             {shop.budget.name === "" ? "記載なし" : shop.budget.name}
           </p>
         </div>
-        <div className="shrink-0 hidden md:block">
+        <div className="md:flex md:flex-col md:gap-2 hidden  shrink-0 ">
           <FavoriteButton
             icon={favoriteIcon}
             isFavorite={isSaved}
             onClick={() => clickFavorite(shop)}
           />
+          <ShareButton shop={shop} />
         </div>
       </div>
-      <div className="shrink-0 mt-3 md:hidden">
+      <div className="flex flex-row gap-2 md:hidden mt-3 shrink-0">
         <FavoriteButton
           icon={favoriteIcon}
           isFavorite={isSaved}
           onClick={() => clickFavorite(shop)}
         />
+        <ShareButton shop={shop} />
       </div>
       <div className="mb-3">
         <p className="flex justify-center text-xl font-bold mb-1.5">店舗写真</p>
