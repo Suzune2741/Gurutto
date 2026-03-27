@@ -4,6 +4,13 @@ type Props = {
   isFavorite: boolean;
   onClick: () => void;
 };
+/**
+ * お気に入り登録・解除ボタン
+ * @param props
+ * @param props.icon ボタン内に表示するアイコン
+ * @param props.isFavorite お気に入りに登録済みかどうか
+ * @param props.onClick ボタンをクリックしたときの処理
+ */
 export const FavoriteButton = ({ icon, isFavorite, onClick }: Props) => {
   return (
     <button

@@ -1,7 +1,10 @@
 import { FaShareAlt } from "react-icons/fa";
 import type { Shop } from "~/types/hotpepper";
 import { Button } from "./Button";
-
+/**
+ * 共有ボタンのコンポーネント
+ * @param shop 共有する店舗の情報
+ */
 export const ShareButton = ({ shop }: { shop: Shop }) => {
   const handleShare = async () => {
     if (navigator.share) {

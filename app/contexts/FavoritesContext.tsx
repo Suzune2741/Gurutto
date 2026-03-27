@@ -10,6 +10,11 @@ type FavoriteContextType = {
 const FavoritesContext = createContext<FavoriteContextType | undefined>(
   undefined,
 );
+/**
+ * お気に入り機能をアプリ全体に提供するプロバイダー
+ * このコンポーネントで囲まれた範囲でuseFavoritesContextが使用できる
+ * @param children 子コンポーネント
+ */
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const favoritesList = useFavorites();
   return (
