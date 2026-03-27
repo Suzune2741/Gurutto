@@ -12,11 +12,13 @@ import { FaBowlFood } from "react-icons/fa6";
 import { GiNoodles, GiMeat, GiSushis } from "react-icons/gi";
 import { IoBeer } from "react-icons/io5";
 import { BiSolidBowlRice } from "react-icons/bi";
+
 type GenreMapItem = {
   keywords: string[];
   Icon: IconType;
   color: string;
 };
+
 const GENRE_MAP: GenreMapItem[] = [
   { keywords: ["ラーメン", "麺"], Icon: GiNoodles, color: "text-yellow-600" },
   { keywords: ["寿司"], Icon: GiSushis, color: "text-orange-500" },
@@ -46,6 +48,13 @@ const GENRE_MAP: GenreMapItem[] = [
     color: "text-red-600",
   },
 ];
+/**
+ * ジャンル名に応じたアイコンを返す
+ * @param genreName 店舗のジャンル名
+ * @param isFavorite お気に入りに登録済みかどうか
+ * @param size アイコンのサイズ
+ * @returns ジャンルに対応したアイコン要素
+ */
 export const getGenreIcon = (
   genreName: string,
   isFavorite: boolean,
