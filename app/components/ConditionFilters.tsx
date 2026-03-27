@@ -24,7 +24,11 @@ const CONDITIONS_MAP: conditions[] = [
   { key: "card", label: "クレカ可", Icon: FaCreditCard },
   { key: "child", label: "お子様OK", Icon: MdChildFriendly },
 ];
+/**
+ * 検索条件フィルターコンポーネント
+ * 個室・飲み放題・駐車場などの条件をトグルボタンで選択できる
 
+ */
 export const ConditionFilters = () => {
   const [searchParams] = useSearchParams();
   const [conditionState, setConditionState] = useState<Record<string, boolean>>(

@@ -8,7 +8,14 @@ import { ShopList } from "~/components/ShopList";
 import { useFavoritesContext } from "~/contexts/FavoritesContext";
 
 type ViewStatus = "Card" | "List";
-
+const DropDownListValues = [
+  { value: "10", label: "10件" },
+  { value: "20", label: "20件" },
+  { value: "50", label: "50件" },
+];
+/**
+ * お気に入り一覧を表示するページ
+ */
 export const FavoritesPage = () => {
   const { favorites } = useFavoritesContext();
   const [viewStatus, setViewStatus] = useState<ViewStatus>("Card");
@@ -72,11 +79,7 @@ export const FavoritesPage = () => {
               <DropDownList
                 value={String(itemsPerPage)}
                 onChange={handleItemsPerPageChange}
-                options={[
-                  { value: "10", label: "10件" },
-                  { value: "20", label: "20件" },
-                  { value: "50", label: "50件" },
-                ]}
+                options={DropDownListValues}
               />
             </div>
           </div>
