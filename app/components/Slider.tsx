@@ -26,7 +26,7 @@ export const Slider = () => {
         step="1"
       />
       <div className="flex w-full justify-between px-2 mt-1">
-        {steps.map((step, i) => (
+        {steps.map((step) => (
           <span key={step.label} className="flex flex-col items-center w-0 ">
             <span>|</span>
             {step.label}

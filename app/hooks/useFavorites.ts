@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Shop } from "~/types/hotpepper";
-
+/**
+ * お気に入り機能を管理する
+ * @returns favorites お気に入りの店舗一覧
+ * @returns clickFavorite お気に入りの追加・削除を行う関数
+ * @returns isFavorite 指定したIDの店舗がお気に入りに登録されているかを返す関数
+ */
 export const useFavorites = () => {
   const [favorites, setFavorites] = useState<Shop[]>([]);
 
@@ -10,7 +15,7 @@ export const useFavorites = () => {
       try {
         setFavorites(JSON.parse(savedFavorite));
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   }, []);

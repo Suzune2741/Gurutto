@@ -23,6 +23,15 @@ const COUNT_OPTIONS = [
   { value: "50", label: "50件" },
   { value: "100", label: "100件" },
 ];
+/**
+ * レストラン検索結果ページ
+ * 検索結果の一覧表示・ページネーション・表示件数の変更を行う
+ * @param props
+ * @param props.shops 検索結果の店舗一覧
+ * @param props.totalItems 検索結果の総件数
+ * @param props.currentPage 現在のページ番号
+ * @param props.itemsPerPage 1ページあたりの表示件数
+ */
 export const ResearchPage = ({
   shops,
   totalItems,

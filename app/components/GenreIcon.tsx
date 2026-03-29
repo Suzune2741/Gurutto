@@ -48,6 +48,11 @@ const GENRE_MAP: GenreMapItem[] = [
     color: "text-red-600",
   },
 ];
+type Props = {
+  genreName: string;
+  isFavorite: boolean;
+  size: number;
+};
 /**
  * ジャンル名に応じたアイコンを返す
  * @param genreName 店舗のジャンル名
@@ -55,11 +60,7 @@ const GENRE_MAP: GenreMapItem[] = [
  * @param size アイコンのサイズ
  * @returns ジャンルに対応したアイコン要素
  */
-export const getGenreIcon = (
-  genreName: string,
-  isFavorite: boolean,
-  size: number,
-) => {
+export const GenreIcon = ({ genreName, isFavorite, size }: Props) => {
   const matchGenre = GENRE_MAP.find((item) =>
     item.keywords.some((keyword) => genreName.includes(keyword)),
   );
