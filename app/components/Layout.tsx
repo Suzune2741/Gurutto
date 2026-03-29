@@ -1,11 +1,11 @@
 import { Outlet, Link } from "react-router";
+import { useCurrentAddress } from "~/hooks/useCurrentAddress";
 /**
  * ヘッダーとフッターを記述する
  * 今回はヘッダのみ、必要に応じてフッターを記述する
  */
 export default function Layout() {
   const menuItems = [
-    { name: "さがす", path: "/research" },
     {
       name: "お気に入り",
       path: "/favorites",
